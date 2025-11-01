@@ -1,4 +1,4 @@
-name: Build Minecraft Plugin
+name: build
 
 on:
   push:
@@ -20,16 +20,9 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-          cache: gradle
 
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
-        run: ./gradlew build --stacktrace --no-daemon
+      - name: Build with system Gradle
+        run: gradle build --no-daemon --stacktrace
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
